@@ -18,7 +18,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #000; /* Fondo negro para rellenar áreas blancas */
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -27,8 +27,8 @@
             position: absolute;
             top: 50%;
             left: 50%;
-            width: 150%;
-            height: 150%;
+            width: 90%;
+            height: 100%;
             transform: translate(-50%, -50%);
             object-fit: cover;
             filter: brightness(50%);
@@ -63,7 +63,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            display: none; /* Oculto por defecto */
+            display: none;
         }
         button {
             padding: 10px 20px;
@@ -89,14 +89,14 @@
     <div id="background-container">
         <video id="background-video" loop muted>
             <source src="VIDEO RR.mp4" type="video/mp4">
-            Tu navegador no soporta el video de fondo.
+           
         </video>
-        <button id="startButton">PRIMERO PULSA AQUI</button>
+        <button id="startButton">PRIMERO PULSA AQUÍ</button>
     </div>
 
     <div class="container" id="optionsContainer">
-        <h1>¿Te gustaría hablar conmigo?</h1>
-        <p>De verdad quiero hablar contigo y aclarar lo que sientes</p>
+        <h1>¿Nos podemos ver?</h1>
+        <p>De verdad quiero hablar contigo</p>
         <button id="yesButton">Sí</button>
         <button id="noButton">No</button>
         <button id="moreTimeButton">Dame más tiempo</button>
@@ -106,31 +106,46 @@
     <audio id="background-audio" loop>
         <source src="Mac Miller - Congratulations mp3.mp3" type="audio/mpeg">
         <source src="Mac Miller - Congratulations.ogg" type="audio/ogg">
-        Tu navegador no soporta la reproducción de audio.
+       
     </audio>
 
     <script>
+        let userResponse = ''; // Variable para almacenar la respuesta del usuario
+
         document.getElementById('startButton').addEventListener('click', () => {
             const video = document.getElementById('background-video');
             const audio = document.getElementById('background-audio');
             const optionsContainer = document.getElementById('optionsContainer');
-            video.playbackRate = 0.5; // Reducir la velocidad de reproducción al 50%
-            video.play();  // Iniciar el video
-            audio.play();  // Iniciar el audio
-            optionsContainer.style.display = 'block'; // Mostrar el cuadro de opciones
-            document.getElementById('startButton').style.display = 'none'; // Ocultar el botón de inicio
+            video.playbackRate = .70; // Velocidad normal del video
+            video.play();
+            audio.playbackRate = 1; // Velocidad normal del audio
+            audio.play();
+            optionsContainer.style.display = 'block'; // Mostrar opciones
+            document.getElementById('startButton').style.display = 'none'; // Ocultar botón de inicio
         });
+
+        // Detectar cuando el usuario presiona "Sí"
         document.getElementById('yesButton').addEventListener('click', () => {
+            userResponse = 'yes'; // Guardar respuesta en la variable
             document.getElementById('responseMessage').innerHTML = 'Te amo, te buscaré lo más pronto posible';
             document.getElementById('responseMessage').style.display = 'block';
+            console.log('Respuesta del usuario: ' + userResponse); // Ver qué seleccionó el usuario
         });
+
+        // Detectar cuando el usuario presiona "No"
         document.getElementById('noButton').addEventListener('click', () => {
+            userResponse = 'no'; // Guardar respuesta en la variable
             document.getElementById('responseMessage').innerHTML = 'Entiendo, estaré aquí para lo que necesites :)';
             document.getElementById('responseMessage').style.display = 'block';
+            console.log('Respuesta del usuario: ' + userResponse); // Ver qué seleccionó el usuario
         });
+
+        // Detectar cuando el usuario presiona "Dame más tiempo"
         document.getElementById('moreTimeButton').addEventListener('click', () => {
+            userResponse = 'more_time'; // Guardar respuesta en la variable
             document.getElementById('responseMessage').innerHTML = 'Tómate todo el tiempo que necesites. <br> Te estaré esperando cuando te sientas lista.';
             document.getElementById('responseMessage').style.display = 'block';
+            console.log('Respuesta del usuario: ' + userResponse); // Ver qué seleccionó el usuario
         });
     </script>
 
